@@ -1,0 +1,251 @@
+int led = D7; 
+int pb = D6;
+int val = LOW;
+int val1 = LOW;
+int dotTime = 500;
+int dashTime = 1500;
+int betweenCharacters = 1500;
+Timer timer(dotTime, led_off);
+int counter = 0;
+int betweenComponent = 0;
+int latch = 0;
+
+void setup() {
+  pinMode(led, OUTPUT);
+  digitalWrite(led, LOW);
+  pinMode(pb, INPUT_PULLDOWN);
+}
+
+void loop() {
+    val = digitalRead(pb);
+    
+//Checking if the button is pressed to reset the sequence    
+    if (val == HIGH)
+        {
+            latch = 1;
+        }
+    
+    if (val == HIGH && latch == 1)
+        {
+            digitalWrite(led, LOW);
+            timer.stop();
+            counter = 0;
+        }
+    
+//Loop to blink the characters    
+    if (latch == 1 && val == LOW)
+        {
+            l();
+            i();
+            a();
+            m();
+        }
+}
+
+void led_off()
+{
+    digitalWrite(led, LOW);
+    counter++;
+    betweenComponent = 0;
+    if (counter == 20)
+    {
+        counter = 0;
+        latch = 0;
+    }
+}
+
+//procedure to call the letter "L"
+void l()
+{
+    //dot
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 0)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dotTime);
+        timer.start();   
+    }
+    
+    //pause
+    if (counter == 1 && betweenComponent == 0)
+    {
+        digitalWrite(led, LOW);
+        timer.changePeriod(dotTime);
+        timer.start();
+        betweenComponent = 1;
+    }
+    
+    //dash
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 2)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dashTime);
+        timer.start();
+    }
+    
+    //pause
+    if (counter == 3 && betweenComponent == 0)
+    {
+    digitalWrite(led, LOW);
+    timer.changePeriod(dotTime);
+    timer.start();
+    betweenComponent = 1;
+    }
+    
+    //dot
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 4)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dotTime);
+        timer.start();
+    }
+    
+    //pause
+    if (counter == 5 && betweenComponent == 0)
+    {
+    digitalWrite(led, LOW);
+    timer.changePeriod(dotTime);
+    timer.start();
+    betweenComponent = 1;
+    }
+    
+    //dot
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 6)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dotTime);
+        timer.start();
+    }
+    
+    //pause
+    if (counter == 7 && betweenComponent == 0)
+    {
+    digitalWrite(led, LOW);
+    timer.changePeriod(betweenCharacters);
+    timer.start();
+    betweenComponent = 1;
+    }
+}
+
+//procedure to call the letter "I"
+void i()
+{
+    //dot
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 8)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dotTime);
+        timer.start();   
+    }
+    
+    //pause
+    if (counter == 9 && betweenComponent == 0)
+    {
+        digitalWrite(led, LOW);
+        timer.changePeriod(dotTime);
+        timer.start();
+        betweenComponent = 1;
+    }
+    
+    //dot
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 10)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dotTime);
+        timer.start();   
+    }
+    
+    //pause
+    if (counter == 11 && betweenComponent == 0)
+    {
+    digitalWrite(led, LOW);
+    timer.changePeriod(betweenCharacters);
+    timer.start();
+    betweenComponent = 1;
+    }
+}
+
+//procedure to call the letter "A"
+void a()
+{
+    //dot
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 12)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dotTime);
+        timer.start();   
+    }
+    
+    //pause
+    if (counter == 13 && betweenComponent == 0)
+    {
+        digitalWrite(led, LOW);
+        timer.changePeriod(dotTime);
+        timer.start();
+        betweenComponent = 1;
+    }
+    
+    //dash
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 14)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dashTime);
+        timer.start();
+    }
+    
+    //pause
+    if (counter == 15 && betweenComponent == 0)
+    {
+    digitalWrite(led, LOW);
+    timer.changePeriod(betweenCharacters);
+    timer.start();
+    betweenComponent = 1;
+    }
+}
+
+//procedure to call the letter "M"
+void m()
+{
+    //dash
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 16)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dashTime);
+        timer.start();
+    }
+    
+    //pause
+    if (counter == 17 && betweenComponent == 0)
+    {
+        digitalWrite(led, LOW);
+        timer.changePeriod(dotTime);
+        timer.start();
+        betweenComponent = 1;
+    }
+    
+    //dash
+    val1 = digitalRead(led);
+    if (val1 == LOW && counter == 18)
+    {
+        digitalWrite(led, HIGH);
+        timer.changePeriod(dashTime);
+        timer.start();
+    }
+    
+    //pause
+    if (counter == 19 && betweenComponent == 0)
+    {
+    digitalWrite(led, LOW);
+    timer.changePeriod(betweenCharacters);
+    timer.start();
+    betweenComponent = 1;
+    }
+}
